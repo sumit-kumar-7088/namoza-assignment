@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OrthoNow - Expert Orthopaedic Consultation</title>
+    <meta name="description" content="Get an expert orthopaedic opinion. Book your consultation at OrthoNow.">
+    <style>
+        /* Mobile-first, lightweight CSS for 90+ PageSpeed score */
+        :root { --primary: #0056b3; --bg: #f4f7f6; --text: #333; }
+        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background-color: var(--bg); color: var(--text); line-height: 1.5; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        header { text-align: center; margin-bottom: 24px; padding-top: 20px; }
+        h1 { color: var(--primary); font-size: 26px; margin-bottom: 8px; line-height: 1.2; }
+        h2 { font-size: 16px; font-weight: 500; color: #555; margin-top: 0; }
+        .card { background: white; padding: 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .trust-banner { background: #e9ecef; padding: 12px; border-radius: 6px; text-align: center; font-size: 14px; margin-bottom: 24px; font-weight: bold; color: #2c3e50; }
+        .form-group { margin-bottom: 16px; }
+        label { display: block; margin-bottom: 6px; font-weight: bold; font-size: 14px; }
+        input { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 16px; }
+        input:focus { outline: 2px solid var(--primary); border-color: transparent; }
+        button { width: 100%; background-color: var(--primary); color: white; border: none; padding: 16px; font-size: 16px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+        button:hover { background-color: #004494; }
+        #thankYouMessage { display: none; text-align: center; padding: 20px; background: #e8f5e9; color: #2e7d32; border-radius: 6px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Get an expert orthopaedic opinion</h1>
+            <h2>Book your consultation at OrthoNow.</h2>
+        </header>
+        
+        <div class="card">
+            <!-- Trust Element -->
+            <div class="trust-banner">
+                ⭐ Trusted by 10,000+ patients across 9 clinics
+            </div>
+
+            <!-- 2-Field Form -->
+            <form id="consultationForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="+91" pattern="[0-9\+\-\s]+">
+                </div>
+                <button type="submit" id="submitBtn">Book Consultation</button>
+            </form>
+
+            <!-- Thank You State -->
+            <div id="thankYouMessage">
+                Thank you! Your consultation request has been received. Our team will contact you shortly.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize dataLayer array
+        window.dataLayer = window.dataLayer || [];
+
+        // Handle form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevents page reload
+            
+            // Capture input values
+            var nameVal = document.getElementById('name').value;
+            var phoneVal = document.getElementById('phone').value;
+
+            // 1. Fire GTM dataLayer push
+            window.dataLayer.push({
+                'event': 'consultation_form_submitted',
+                'lead_name': nameVal,
+                'lead_phone': phoneVal,
+                'form_source': 'OrthoNow_Landing_Page'
+            });
+
+            // 2. Hide form and show thank-you message
+            document.getElementById('consultationForm').style.display = 'none';
+            document.getElementById('thankYouMessage').style.display = 'block';
+
+            // Console log to help you easily demonstrate this in your Loom video
+            console.log("SUCCESS: Form submitted without page reload.");
+            console.log("DataLayer Push Fired:", window.dataLayer);
+        });
+    </script>
+</body>
+</html>
